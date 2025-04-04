@@ -1,5 +1,5 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
+import AuthContext from "../providers/AuthContext";
 
 const Navbar = () => {
   const navLinks = (
@@ -42,7 +42,7 @@ const Navbar = () => {
         <ul className="menu menu-horizontal px-1 gap-4">{navLinks}</ul>
       </div>
       <div className="navbar-end">
-        <a className="cursor-pointer">Login</a>
+        <Link to="/login">Login</Link>
       </div>
     </div>
   );
