@@ -1,11 +1,50 @@
 import { Link, NavLink } from "react-router-dom";
 import AuthContext from "../providers/AuthContext";
+import { useContext } from "react";
+import { IoIosArrowDown } from "react-icons/io";
 
 const Navbar = () => {
+  const { user, logOut } = useContext(AuthContext);
   const navLinks = (
     <>
-      <NavLink to="/">Home</NavLink>
-      <NavLink to="/">Services</NavLink>
+      {user ? (
+        <div className="flex gap-4">
+          <NavLink to="/">Home</NavLink>
+          <NavLink to="/">Services</NavLink>
+
+          <div className="dropdown dropdown-end z-50">
+            <div tabIndex={0} role="button">
+              <Link className="flex items-center">
+                Dashboard <IoIosArrowDown />
+              </Link>
+            </div>
+            <ul
+              tabIndex={0}
+              className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+            >
+              <li>
+                <Link to="/add-job" className="justify-between">
+                  Add Job
+                </Link>
+              </li>
+              <li>
+                <Link to="/my-posted-jobs">My Posted Jobs</Link>
+              </li>
+              <li>
+                <Link to="/my-bids">My Bids</Link>
+              </li>
+              <li>
+                <Link to="/bid-requests">Bid Requests</Link>
+              </li>
+            </ul>
+          </div>
+        </div>
+      ) : (
+        <div className="flex gap-4">
+          <NavLink to="/">Home</NavLink>
+          <NavLink to="/">Services</NavLink>
+        </div>
+      )}
     </>
   );
   return (
@@ -42,7 +81,37 @@ const Navbar = () => {
         <ul className="menu menu-horizontal px-1 gap-4">{navLinks}</ul>
       </div>
       <div className="navbar-end">
-        <Link to="/login">Login</Link>
+        {!user && <Link to="/login">Login</Link>}
+        {user && (
+          <div className="dropdown dropdown-end z-50">
+            <div
+              tabIndex={0}
+              role="button"
+              className="btn btn-ghost btn-circle avatar"
+            >
+              <div title={user?.displayName} className="w-10 rounded-full">
+                <img
+                  referrerPolicy="no-referrer"
+                  alt="User Profile Photo"
+                  src={user?.photoURL}
+                />
+              </div>
+            </div>
+            <ul
+              tabIndex={0}
+              className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+            >
+              <li className="mt-2">
+                <button
+                  onClick={logOut}
+                  className="bg-gray-200 block text-center"
+                >
+                  Logout
+                </button>
+              </li>
+            </ul>
+          </div>
+        )}
       </div>
     </div>
   );

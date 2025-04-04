@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 // import { useContext } from "react";
 // import toast from "react-hot-toast";
 import AuthContext from "../../providers/AuthContext";
+import SocialLogin from "../../components/SocialLogin";
 
 const Register = () => {
   //   const navigate = useNavigate();
@@ -57,7 +58,7 @@ const Register = () => {
             Get Your Free Account Now.
           </p>
 
-          <div
+          {/* <div
             // onClick={handleGoogleSignIn}
             className="flex cursor-pointer items-center justify-center mt-4 text-gray-600 transition-colors duration-300 transform border rounded-lg   hover:bg-gray-50 "
           >
@@ -85,7 +86,8 @@ const Register = () => {
             <span className="w-5/6 px-4 py-3 font-bold text-center">
               Sign in with Google
             </span>
-          </div>
+          </div> */}
+          <SocialLogin></SocialLogin>
 
           <div className="flex items-center justify-between mt-4">
             <span className="w-1/5 border-b  lg:w-1/4"></span>

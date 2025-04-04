@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import SocialLogin from "../../components/SocialLogin";
 // import bgImg from "../../assets/images/login.jpg";
 // import logo from "../../assets/images/logo.png";
 // import { useContext } from "react";
@@ -66,7 +67,7 @@ const Login = () => {
             Welcome back!
           </p>
 
-          <div
+          {/* <div
             // onClick={handleGoogleSignIn}
             className="flex cursor-pointer items-center justify-center mt-4 text-gray-600 transition-colors duration-300 transform border rounded-lg   hover:bg-gray-50 "
           >
@@ -94,7 +95,8 @@ const Login = () => {
             <span className="w-5/6 px-4 py-3 font-bold text-center">
               Sign in with Google
             </span>
-          </div>
+          </div> */}
+          <SocialLogin></SocialLogin>
 
           <div className="flex items-center justify-between mt-4">
             <span className="w-1/5 border-b  lg:w-1/4"></span>
