@@ -23,18 +23,18 @@ const Navbar = () => {
               className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
             >
               <li>
-                <Link to="/add-job" className="justify-between">
-                  Add Job
+                <Link to="/add-service" className="justify-between">
+                  Add Service
                 </Link>
               </li>
               <li>
-                <Link to="/my-posted-jobs">My Posted Jobs</Link>
+                <Link to="/manage-service">Manage Service</Link>
               </li>
               <li>
-                <Link to="/my-bids">My Bids</Link>
+                <Link to="/booked-service">Booked Services</Link>
               </li>
               <li>
-                <Link to="/bid-requests">Bid Requests</Link>
+                <Link to="/service-to-do">Service To Do</Link>
               </li>
             </ul>
           </div>
@@ -42,7 +42,7 @@ const Navbar = () => {
       ) : (
         <div className="flex gap-4">
           <NavLink to="/">Home</NavLink>
-          <NavLink to="/">Services</NavLink>
+          <NavLink to="/services">Services</NavLink>
         </div>
       )}
     </>
