@@ -1,17 +1,17 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import SocialLogin from "../../components/SocialLogin";
 // import bgImg from "../../assets/images/login.jpg";
 // import logo from "../../assets/images/logo.png";
-// import { useContext } from "react";
-// import toast from "react-hot-toast";
-// import AuthContext from "../../providers/AuthContext";
+import { useContext } from "react";
+import toast from "react-hot-toast";
+import AuthContext from "../../providers/AuthContext";
 
 const Login = () => {
-  //   const navigate = useNavigate();
-  //   const location = useLocation();
-  //   const from = location?.state || "/";
-  //   console.log(from);
-  //   const { signIn, signInWithGoogle } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location?.state || "/";
+  console.log(from);
+  const { signIn } = useContext(AuthContext);
 
   // Google Signin
   //   const handleGoogleSignIn = async () => {
@@ -27,22 +27,22 @@ const Login = () => {
   //   };
 
   // Email Password Signin
-  //   const handleSignIn = async (e) => {
-  //     e.preventDefault();
-  //     const form = e.target;
-  //     const email = form.email.value;
-  //     const pass = form.password.value;
-  //     console.log({ email, pass });
-  //     try {
-  //       //User Login
-  //       await signIn(email, pass);
-  //       toast.success("Signin Successful");
-  //       navigate(from, { replace: true });
-  //     } catch (err) {
-  //       console.log(err);
-  //       toast.error(err?.message);
-  //     }
-  //   };
+  const handleSignIn = async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const email = form.email.value;
+    const pass = form.password.value;
+    console.log({ email, pass });
+    try {
+      //User Login
+      await signIn(email, pass);
+      toast.success("Signin Successful");
+      navigate(from, { replace: true });
+    } catch (err) {
+      console.log(err);
+      toast.error(err?.message);
+    }
+  };
 
   return (
     <div className="flex justify-center items-center min-h-[calc(100vh-306px)] my-12">
@@ -107,7 +107,7 @@ const Login = () => {
 
             <span className="w-1/5 border-b dark:border-gray-400 lg:w-1/4"></span>
           </div>
-          <form>
+          <form onSubmit={handleSignIn}>
             <div className="mt-4">
               <label
                 className="block mb-2 text-sm font-medium text-gray-600 "
