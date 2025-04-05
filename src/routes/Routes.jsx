@@ -4,6 +4,9 @@ import Main from "../layouts/Main";
 import Login from "../pages/Authentication/Login";
 import Register from "../pages/Authentication/Register";
 import Home from "../pages/Home";
+import PrivateRoute from "./PrivateRoute";
+import AddService from "../pages/AddService";
+import AllServices from "../pages/AllServices";
 
 const router = createBrowserRouter([
   {
@@ -22,6 +25,18 @@ const router = createBrowserRouter([
       {
         path: "/registration",
         element: <Register></Register>,
+      },
+      {
+        path: "/add-service",
+        element: (
+          <PrivateRoute>
+            <AddService></AddService>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/all-services",
+        element: <AllServices></AllServices>,
       },
     ],
   },

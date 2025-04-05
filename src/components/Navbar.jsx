@@ -11,7 +11,7 @@ const Navbar = () => {
       {user ? (
         <div className="flex gap-4">
           <NavLink to="/">Home</NavLink>
-          <NavLink to="/">Services</NavLink>
+          <NavLink to="/all-services">Services</NavLink>
 
           <div className="dropdown dropdown-end z-50">
             <div tabIndex={0} role="button">
