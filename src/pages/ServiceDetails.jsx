@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import AuthContext from "../providers/AuthContext";
+import toast from "react-hot-toast";
 
 const ServiceDetails = () => {
   const { id } = useParams();
@@ -20,31 +21,34 @@ const ServiceDetails = () => {
     );
     setService(data);
   };
-  console.log(service);
-  const handlePurchase = async () => {
+  // console.log(service);
+  const handlePurchase = async (e) => {
+    e.preventDefault();
     const bookingData = {
-      serviceId: service._id,
-      serviceName: service.service_name,
-      serviceImage: service.service_image,
-      providerEmail: service.provider?.email,
-      providerName: service.provider?.provider_name,
-      userEmail: user.email,
-      userName: user.displayName,
-      bookingDate,
+      service_Id: service._id,
+      service_name: service.service_name,
+      service_image: service.service_image,
+      provider_email: service.provider?.provider_email,
+      provider_name: service.provider?.provider_name,
+      user_email: user.email,
+      user_name: user.displayName,
+      booking_date: bookingDate,
       instructions,
       price: service.price,
-      serviceStatus: "pending",
+      service_status: "pending",
     };
 
     try {
-      await axios.post(`${import.meta.env.VITE_API_URL}/bookings`, bookingData);
-      alert("Service booked successfully!");
+      await axios.post(
+        `${import.meta.env.VITE_API_URL}/add-booking`,
+        bookingData
+      );
+      toast.success("booking Successfully!!!");
       setShowModal(false);
       setBookingDate("");
       setInstructions("");
     } catch (err) {
-      console.error(err);
-      alert("Failed to book service");
+      toast.error(err.response?.data?.error || "Something went wrong");
     }
   };
   return (
@@ -139,7 +143,7 @@ const ServiceDetails = () => {
 
               {/* Current User Email */}
               <div>
-                <label className="label font-semibold">Your Email</label>
+                <label className="label font-semibold">User Email</label>
                 <input
                   disabled
                   value={user.email}
