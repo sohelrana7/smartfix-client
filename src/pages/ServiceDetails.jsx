@@ -33,6 +33,7 @@ const ServiceDetails = () => {
       user_email: user.email,
       user_name: user.displayName,
       booking_date: bookingDate,
+      description: service.description,
       instructions,
       price: service.price,
       service_status: "pending",
@@ -175,6 +176,16 @@ const ServiceDetails = () => {
                 />
               </div>
 
+              {/* Description */}
+              <div className="md:col-span-2">
+                <label className="label font-semibold">Description</label>
+                <textarea
+                  placeholder="Address, area, or customized service plan"
+                  value={service.description}
+                  className="textarea textarea-bordered w-full"
+                  rows={3}
+                />
+              </div>
               {/* Special Instructions */}
               <div className="md:col-span-2">
                 <label className="label font-semibold">
@@ -198,7 +209,10 @@ const ServiceDetails = () => {
               >
                 Cancel
               </button>
-              <button onClick={handlePurchase} className="btn btn-primary">
+              <button
+                onClick={handlePurchase}
+                className="btn bg-[#f5580b] border-none text-white flex items-center"
+              >
                 Purchase
               </button>
             </div>

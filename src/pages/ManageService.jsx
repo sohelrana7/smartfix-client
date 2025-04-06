@@ -122,7 +122,7 @@ const ManageService = () => {
                     </th>
 
                     <th className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500">
-                      Edit
+                      Actions
                     </th>
                   </tr>
                 </thead>
@@ -281,7 +281,7 @@ const ManageService = () => {
               </button>
               <button
                 onClick={() => handleUpdateService(editService._id)}
-                className="btn btn-primary"
+                className="btn bg-[#f5580b] border-none text-white flex items-center"
               >
                 Save Changes
               </button>
