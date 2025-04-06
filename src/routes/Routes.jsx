@@ -7,6 +7,7 @@ import Home from "../pages/Home";
 import PrivateRoute from "./PrivateRoute";
 import AddService from "../pages/AddService";
 import AllServices from "../pages/AllServices";
+import ServiceDetails from "../pages/ServiceDetails";
 
 const router = createBrowserRouter([
   {
@@ -37,6 +38,14 @@ const router = createBrowserRouter([
       {
         path: "/all-services",
         element: <AllServices></AllServices>,
+      },
+      {
+        path: "/service/:id",
+        element: (
+          <PrivateRoute>
+            <ServiceDetails></ServiceDetails>
+          </PrivateRoute>
+        ),
       },
     ],
   },
