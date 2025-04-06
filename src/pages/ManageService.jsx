@@ -21,42 +21,42 @@ const ManageService = () => {
   };
   //   console.log(services);
   // delete functionality
-  //   const handleDelete = async (id) => {
-  //     try {
-  //       const { data } = await axios.delete(
-  //         `${import.meta.env.VITE_API_URL}/job/${id}`
-  //       );
-  //       console.log(data);
-  //       toast.success("Data Deleted Successfully!!!");
-  //       fetchAllJobs();
-  //     } catch (err) {
-  //       console.log(err);
-  //       toast.error(err.message);
-  //     }
-  //   };
+  const handleDelete = async (id) => {
+    try {
+      const { data } = await axios.delete(
+        `${import.meta.env.VITE_API_URL}/service/${id}`
+      );
+      console.log(data);
+      toast.success("Data Deleted Successfully!!!");
+      fetchAllServices();
+    } catch (err) {
+      console.log(err);
+      toast.error(err.message);
+    }
+  };
 
-  //   const modernDelete = (id) => {
-  //     toast((t) => (
-  //       <span className="flex gap-3 items-center">
-  //         Are you <b>Sure</b>
-  //         <button
-  //           className="bg-red-400 px-2 py-1 rounded-md text-white"
-  //           onClick={() => {
-  //             toast.dismiss(t.id);
-  //             handleDelete(id);
-  //           }}
-  //         >
-  //           Yes
-  //         </button>
-  //         <button
-  //           className="bg-green-400 px-2 py-1 rounded-md text-white"
-  //           onClick={() => toast.dismiss(t.id)}
-  //         >
-  //           Cancel
-  //         </button>
-  //       </span>
-  //     ));
-  //   };
+  const deleteWithConfirmation = (id) => {
+    toast((t) => (
+      <span className="flex gap-3 items-center">
+        Are you <b>Sure</b>
+        <button
+          className="bg-red-400 px-2 py-1 rounded-md text-white"
+          onClick={() => {
+            toast.dismiss(t.id);
+            handleDelete(id);
+          }}
+        >
+          Yes
+        </button>
+        <button
+          className="bg-green-400 px-2 py-1 rounded-md text-white"
+          onClick={() => toast.dismiss(t.id)}
+        >
+          Cancel
+        </button>
+      </span>
+    ));
+  };
 
   const handleUpdateService = async (id) => {
     try {
@@ -143,7 +143,7 @@ const ManageService = () => {
                       <td className="px-4 py-4 text-sm whitespace-nowrap">
                         <div className="flex items-center gap-x-6">
                           <button
-                            // onClick={() => modernDelete(job._id)}
+                            onClick={() => deleteWithConfirmation(service._id)}
                             className="text-gray-500 transition-colors duration-200   hover:text-red-500 focus:outline-none"
                           >
                             <svg
