@@ -6,7 +6,7 @@ const ServiceCard = ({ service }) => {
   // console.log(service);
   return (
     <div className="card lg:card-side bg-base-100 shadow-sm">
-      <figure className="w-[500px] h-[300px]">
+      <figure className="lg:w-[500px] lg:h-[300px]">
         <img
           className="w-full h-full object-cover"
           src={service_image}

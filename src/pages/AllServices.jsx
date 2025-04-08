@@ -16,10 +16,6 @@ const AllServices = () => {
     fetchAllServices();
   }, [search]);
 
-  // const filteredServices = services.filter((service) =>
-  //   service.service_name.toLowerCase().includes(query.toLowerCase())
-  // );
-  // console.log(filteredServices);
   return (
     <div className="container mx-auto my-10">
       <h1 className="my-4 text-2xl">All Services here</h1>
