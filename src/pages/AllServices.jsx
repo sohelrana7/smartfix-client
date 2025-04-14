@@ -1,16 +1,15 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import ServiceCard from "../components/ServiceCard";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const AllServices = () => {
+  const axiosSecure = useAxiosSecure();
   const [services, setServices] = useState([]);
   const [search, setSearch] = useState("");
 
   useEffect(() => {
     const fetchAllServices = async () => {
-      const { data } = await axios.get(
-        `${import.meta.env.VITE_API_URL}/all-services?search=${search}`
-      );
+      const { data } = await axiosSecure.get(`/all-services?search=${search}`);
       setServices(data);
     };
     fetchAllServices();

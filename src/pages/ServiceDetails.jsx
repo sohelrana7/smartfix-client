@@ -1,10 +1,11 @@
-import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import AuthContext from "../providers/AuthContext";
 import toast from "react-hot-toast";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const ServiceDetails = () => {
+  const axiosSecure = useAxiosSecure();
   const { id } = useParams();
   const [service, setService] = useState({});
   const [showModal, setShowModal] = useState(false);
@@ -14,11 +15,9 @@ const ServiceDetails = () => {
   const { user } = useContext(AuthContext);
   useEffect(() => {
     fetchSingleService();
-  }, [id]);
+  }, []);
   const fetchSingleService = async () => {
-    const { data } = await axios.get(
-      `${import.meta.env.VITE_API_URL}/service/${id}`
-    );
+    const { data } = await axiosSecure.get(`/service/${id}`);
     setService(data);
   };
   // console.log(service);
@@ -40,7 +39,7 @@ const ServiceDetails = () => {
     };
 
     try {
-      await axios.post(
+      await axiosSecure.post(
         `${import.meta.env.VITE_API_URL}/add-booking`,
         bookingData
       );

@@ -3,9 +3,10 @@ import "react-datepicker/dist/react-datepicker.css";
 import AuthContext from "../providers/AuthContext";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const AddService = () => {
+  const axiosSecure = useAxiosSecure();
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
@@ -32,8 +33,8 @@ const AddService = () => {
 
     // make post request
     try {
-      await axios.post(`${import.meta.env.VITE_API_URL}/add-service`, formData);
-    //   form.reset();
+      await axiosSecure.post(`/add-service`, formData);
+      //   form.reset();
       toast.success("Service added Successfully!!!");
       navigate("/");
     } catch (err) {

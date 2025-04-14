@@ -1,11 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import axios from "axios";
+
 import { useContext, useEffect, useState } from "react";
 import AuthContext from "../providers/AuthContext";
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const ManageService = () => {
+  const axiosSecure = useAxiosSecure();
   const { user } = useContext(AuthContext);
   const [services, setServices] = useState([]);
   const [showModal, setShowModal] = useState(false);
@@ -14,18 +16,14 @@ const ManageService = () => {
     fetchAllServices();
   }, [user]);
   const fetchAllServices = async () => {
-    const { data } = await axios.get(
-      `${import.meta.env.VITE_API_URL}/services/${user?.email}`
-    );
+    const { data } = await axiosSecure.get(`/services/${user?.email}`);
     setServices(data);
   };
   //   console.log(services);
   // delete functionality
   const handleDelete = async (id) => {
     try {
-      const { data } = await axios.delete(
-        `${import.meta.env.VITE_API_URL}/service/${id}`
-      );
+      const { data } = await axiosSecure.delete(`/service/${id}`);
       console.log(data);
       toast.success("Data Deleted Successfully!!!");
       fetchAllServices();
@@ -63,10 +61,7 @@ const ManageService = () => {
       // Make a shallow copy and remove _id
       const { _id, ...serviceDataWithoutId } = editService;
 
-      await axios.put(
-        `${import.meta.env.VITE_API_URL}/update-service/${id}`,
-        serviceDataWithoutId
-      );
+      await axiosSecure.put(`/update-service/${id}`, serviceDataWithoutId);
 
       toast.success("Data Updated Successfully!!!");
       // Optionally close modal, refresh data

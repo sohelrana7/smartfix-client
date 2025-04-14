@@ -11,6 +11,8 @@ import {
 } from "firebase/auth";
 import auth from "../firebase/firebase.init";
 
+import { axiosSecure } from "../hooks/useAxiosSecure";
+
 const provider = new GoogleAuthProvider();
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
@@ -43,7 +45,25 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       console.log("CurrentUser-->", currentUser);
-      setUser(currentUser);
+      if (currentUser?.email) {
+        setUser(currentUser);
+        try {
+          const { data } = await axiosSecure.post(`/jwt`, {
+            email: currentUser?.email,
+          });
+          console.log("jwt response ", data);
+        } catch (error) {
+          console.error("jwt token creation failed", error);
+        }
+      } else {
+        setUser(null);
+        try {
+          await axiosSecure.get(`/logout`);
+          console.log("logged out and token cleared");
+        } catch (err) {
+          console.error("logout error", err);
+        }
+      }
       setLoading(false);
     });
     return () => {

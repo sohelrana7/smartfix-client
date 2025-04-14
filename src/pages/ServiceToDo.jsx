@@ -1,27 +1,28 @@
 import React, { useContext, useEffect, useState } from "react";
 import AuthContext from "../providers/AuthContext";
-import axios from "axios";
+
 import toast from "react-hot-toast";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const ServiceToDo = () => {
+  const axiosSecure = useAxiosSecure();
   const { user } = useContext(AuthContext);
   const [bookings, setBookings] = useState([]);
   useEffect(() => {
     fetchAllBookings();
   }, [user]);
   const fetchAllBookings = async () => {
-    const { data } = await axios.get(
-      `${import.meta.env.VITE_API_URL}/bookings/${user?.email}?provider=true`
+    const { data } = await axiosSecure.get(
+      `/bookings/${user?.email}?provider=true`
     );
     setBookings(data);
   };
   // console.log(bookings);
   const handleStatusChange = async (id, newStatus) => {
     try {
-      const { data } = await axios.patch(
-        `${import.meta.env.VITE_API_URL}/booking-status-update/${id}`,
-        { newStatus }
-      );
+      const { data } = await axiosSecure.patch(`/booking-status-update/${id}`, {
+        newStatus,
+      });
 
       if (data.modifiedCount > 0) {
         toast.success("Status updated!");
