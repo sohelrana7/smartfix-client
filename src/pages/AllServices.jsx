@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ServiceCard from "../components/ServiceCard";
 import useAxiosSecure from "../hooks/useAxiosSecure";
+import { Helmet } from "react-helmet";
 
 const AllServices = () => {
   const axiosSecure = useAxiosSecure();
@@ -17,6 +18,9 @@ const AllServices = () => {
 
   return (
     <div className="container mx-auto my-10">
+      <Helmet>
+        <title>All Services</title>
+      </Helmet>
       <h1 className="my-4 text-2xl">All Services here</h1>
       <div className=" flex items-center justify-center my-10">
         <form

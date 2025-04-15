@@ -13,26 +13,13 @@ const Login = () => {
   console.log(from);
   const { signIn } = useContext(AuthContext);
 
-  // Google Signin
-  //   const handleGoogleSignIn = async () => {
-  //     try {
-  //       await signInWithGoogle();
-
-  //       toast.success("Signin Successful");
-  //       navigate(from, { replace: true });
-  //     } catch (err) {
-  //       console.log(err);
-  //       toast.error(err?.message);
-  //     }
-  //   };
-
   // Email Password Signin
   const handleSignIn = async (e) => {
     e.preventDefault();
     const form = e.target;
     const email = form.email.value;
     const pass = form.password.value;
-    console.log({ email, pass });
+    // console.log({ email, pass });
     try {
       //User Login
       await signIn(email, pass);

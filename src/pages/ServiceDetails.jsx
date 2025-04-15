@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import AuthContext from "../providers/AuthContext";
 import toast from "react-hot-toast";
 import useAxiosSecure from "../hooks/useAxiosSecure";
+import { Helmet } from "react-helmet";
 
 const ServiceDetails = () => {
   const axiosSecure = useAxiosSecure();
@@ -53,6 +54,9 @@ const ServiceDetails = () => {
   };
   return (
     <div className="container mx-auto my-10">
+      <Helmet>
+        <title>Services | Service Details</title>
+      </Helmet>
       <h1>Details page : {id}</h1>
       <div className="card lg:card-side bg-base-100 shadow-sm">
         <figure className="w-[500px] h-[300px]">

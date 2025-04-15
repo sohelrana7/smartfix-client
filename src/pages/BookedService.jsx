@@ -3,6 +3,7 @@ import AuthContext from "../providers/AuthContext";
 
 import { Link } from "react-router-dom";
 import useAxiosSecure from "../hooks/useAxiosSecure";
+import { Helmet } from "react-helmet";
 
 const BookedService = () => {
   const axiosSecure = useAxiosSecure();
@@ -18,6 +19,9 @@ const BookedService = () => {
   console.log(bookings);
   return (
     <section className="container px-4 mx-auto pt-12">
+      <Helmet>
+        <title>Booked Service</title>
+      </Helmet>
       <div className="flex items-center gap-x-3">
         <h2 className="text-lg font-medium text-gray-800 ">
           My Posted bookings

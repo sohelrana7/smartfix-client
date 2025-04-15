@@ -3,6 +3,7 @@ import AuthContext from "../providers/AuthContext";
 
 import toast from "react-hot-toast";
 import useAxiosSecure from "../hooks/useAxiosSecure";
+import { Helmet } from "react-helmet";
 
 const ServiceToDo = () => {
   const axiosSecure = useAxiosSecure();
@@ -41,6 +42,9 @@ const ServiceToDo = () => {
 
   return (
     <section className="container px-4 mx-auto my-12">
+      <Helmet>
+        <title>Service To Do</title>
+      </Helmet>
       <div className="flex items-center gap-x-3">
         <h2 className="text-lg font-medium text-gray-800 ">Service To Do</h2>
 

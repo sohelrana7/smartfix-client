@@ -44,14 +44,14 @@ const AuthProvider = ({ children }) => {
   // onAuthStateChange
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
-      console.log("CurrentUser-->", currentUser);
+      // console.log("CurrentUser-->", currentUser);
       if (currentUser?.email) {
         setUser(currentUser);
         try {
-          const { data } = await axiosSecure.post(`/jwt`, {
+          await axiosSecure.post(`/jwt`, {
             email: currentUser?.email,
           });
-          console.log("jwt response ", data);
+          // console.log("jwt response ", data);
         } catch (error) {
           console.error("jwt token creation failed", error);
         }
